@@ -2,12 +2,8 @@ import cv2
 
 cap = cv2.VideoCapture(0)
 
-while True:
-    r, im =cap.read()
-    cv2.imshow('dd',im)
-    k = cv2.waitKey(30) & 0xff
-    if k == 27:
-        break
-
+r, im =cap.read()
+k = cv2.waitKey(30) & 0xff
+cv2.imwrite('test.jpg', im) # 사진 저장
 cap.release()
 cv2.destroyAllWindows()
