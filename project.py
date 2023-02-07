@@ -4,16 +4,14 @@ import time
 import easyocr
 import argparse
 
-from sqlalchemy import true
-
-from domain.user.user_crud import create_user, get_existing_user
+from domain.user.user_crud import  get_existing_user
 from domain.user.user_schema import UserCreate
-from sqlalchemy.orm import Session
-from database import get_db
-from fastapi import Depends
+#from sqlalchemy.orm import Session
+#from database import get_db
+#from fastapi import Depends
 from database import SessionLocal
-from models import User
-from speech import speak
+#from models import User
+#from speech import speak
 
 
 def make_parser():
@@ -37,18 +35,18 @@ if not os.path.exists('result') :
 def main(args):
     cap = cv2.VideoCapture(0)
     
-    width = int(cap.get(3)) # 가로 길이 가져오기 
-    height = int(cap.get(4)) # 세로 길이 가져오기
-    fps = 30
-    cnt = 1
+    #width = int(cap.get(3)) # 가로 길이 가져오기 
+    #height = int(cap.get(4)) # 세로 길이 가져오기
+    #fps = 30
+    #cnt = 1
 
-    fcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-    out = cv2.VideoWriter('result/webcam.avi', fcc, fps, (width, height))
+    #fcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+    #out = cv2.VideoWriter('result/webcam.avi', fcc, fps, (width, height))
 
     charge = False
     db = SessionLocal()
     while (True) :
-        k = cv2.waitKey(1) & 0xFF
+        #
         ret, frame = cap.read()
         if args.charge == 100:
             charge = False
@@ -57,8 +55,9 @@ def main(args):
         
         time.sleep(1)
         if ret:
-            out.write(frame)
+            #out.write(frame)
             cv2.imshow('frame', frame)
+            k = cv2.waitKey(1) & 0xFF
             result = reader.readtext(frame)
             print("detection....")
             answer =[]
@@ -104,7 +103,7 @@ def main(args):
             break
 
     cap.release()
-    out.release()
+    #out.release()
     cv2.destroyAllWindows()
 
 
