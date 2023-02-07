@@ -9,7 +9,7 @@ from domain.user.user_schema import UserCreate
 #from sqlalchemy.orm import Session
 #from database import get_db
 #from fastapi import Depends
-from database import SessionLocal
+#from database import SessionLocal
 #from models import User
 #from speech import speak
 
@@ -27,7 +27,7 @@ def make_parser():
     )
     return parser
 
-reader = easyocr.Reader(['ko'],)# gpu=False) 
+reader = easyocr.Reader(['ko'],user_network_directory='./user_network') 
 
 if not os.path.exists('result') :
     os.makedirs('result')
@@ -38,13 +38,13 @@ def main(args):
     #width = int(cap.get(3)) # 가로 길이 가져오기 
     #height = int(cap.get(4)) # 세로 길이 가져오기
     #fps = 30
-    #cnt = 1
+    cnt = 1
 
     #fcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
     #out = cv2.VideoWriter('result/webcam.avi', fcc, fps, (width, height))
 
     charge = False
-    db = SessionLocal()
+    #db = SessionLocal()
     
     print(1)
     while (True) :
@@ -71,7 +71,8 @@ def main(args):
             for i in range(len(answer)):
                 user = UserCreate
                 user.car_number = answer[i]
-                user = get_existing_user(db = db , user_create=user)
+                #user = get_existing_user(db = db , user_create=user)
+            
                 if user:
                     cv2.imwrite('result/screenshot{}.png'.format(cnt), frame, params=[cv2.IMWRITE_PNG_COMPRESSION,0])
                     
