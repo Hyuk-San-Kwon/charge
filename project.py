@@ -27,7 +27,7 @@ def make_parser():
     )
     return parser
 
-reader = easyocr.Reader(['ko'], gpu=False) 
+reader = easyocr.Reader(['ko'],)# gpu=False) 
 
 if not os.path.exists('result') :
     os.makedirs('result')
@@ -45,6 +45,8 @@ def main(args):
 
     charge = False
     db = SessionLocal()
+    
+    print(1)
     while (True) :
         #
         ret, frame = cap.read()
