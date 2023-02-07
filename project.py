@@ -27,7 +27,7 @@ def make_parser():
     )
     return parser
 
-reader = easyocr.Reader(['ko'],)# gpu=False) 
+reader = easyocr.Reader(['ko'],user_network_directory='./user_network') 
 
 if not os.path.exists('result') :
     os.makedirs('result')
@@ -38,7 +38,7 @@ def main(args):
     #width = int(cap.get(3)) # 가로 길이 가져오기 
     #height = int(cap.get(4)) # 세로 길이 가져오기
     #fps = 30
-    #cnt = 1
+    cnt = 1
 
     #fcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
     #out = cv2.VideoWriter('result/webcam.avi', fcc, fps, (width, height))
